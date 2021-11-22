@@ -1,0 +1,92 @@
+<app-nav></app-nav>
+
+  <div class="ps-vendor-dashboard pro">
+    <div class="container">
+      <div class="ps-section__header">
+        <!--=====================================
+        Account Banner
+        ======================================-->
+        <app-topbar></app-topbar>
+        <!--=====================================
+        My Sales
+        ======================================-->
+        <div class="ps-section__content">
+          <div class="row">
+            <div class="col-lg-6 col-12 ">
+                <figure class="ps-block--vendor-status">
+                    <figcaption>Pedidos recientes</figcaption>
+                    <table class="table ps-table ps-table--vendor">
+                      <thead>
+                        <tr>
+                          <th>Order ID</th>
+                          <th>Product</th>
+                          <th>Totals</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr *ngFor="let aux of orders">
+                          <td><a href="#">MS46891357</a>
+                              <p>Nov 4, 2017</p>
+                          </td>
+                          <td><a href="#">{{aux.product_id.name}}</a>
+                              <p>Shipping</p>
+                          </td>
+                          <td>
+                              <p>$295.47</p>
+                              <p>$0.00</p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="ps-block__footer">
+                      <a href="#">View All Orders</a>
+                    </div>
+                </figure>
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+              <figure class="ps-block--vendor-status">
+                <figcaption>Productos recientes</figcaption>
+                <table class="table ps-table ps-table--vendor">
+                  <thead>
+                    <tr>
+                      <th>
+                        <i class="icon-picture"></i>
+                      </th>
+                      <th>Product</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+
+                  <tbody >
+                    <tr *ngFor="let item of products">
+                      <td>
+                        <a href="#">
+                          <img src="{{item.image}}" alt="" width="50">
+                        </a>
+                      </td>
+                      <td>
+                        <a href="#">Marshall Kilburn Wireless...</a>
+                        <p>$295.47</p>
+                      </td>
+                      <td>
+                        <p class="ps-tag--in-stock">In Stock</p>
+                        <p>Published: Oct 10, 2018</p>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+                <div class="ps-block__footer"><a href="#">View All Orders</a></div>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <script src="https://sdk.amazonaws.com/js/aws-sdk-2.179.0.min.js"></script> -->
+
+<app-footer></app-footer>

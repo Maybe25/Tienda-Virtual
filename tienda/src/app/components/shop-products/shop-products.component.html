@@ -1,0 +1,156 @@
+<app-nav></app-nav>
+<div class="ps-breadcrumb">
+  <div class="ps-container">
+      <ul class="breadcrumb">
+          <li><a href="index.html">Inicio</a></li>
+          <li>Productos</li>
+      </ul>
+  </div>
+</div>
+<div class="ps-page--shop" id="shop-sidebar">
+  <div class="container">
+    <form (ngSubmit)="filterProduct()">
+      <div class="ps-layout--shop">
+          <div class="ps-layout__left">
+              <aside class="widget widget_shop">
+                  <h4 class="widget-title">Categorías</h4>
+                  <ul class="ps-list--categories">
+                    <li  class="menu-item-has-children" *ngFor="let cat of categories">
+                      <a style="cursor: pointer;" (click)="filterCatProduct(cat)">{{cat.name}}</a><span class="sub-toggle"><i class="fa fa-angle-down"></i></span>
+                      <ul class="sub-menu">
+                        <li *ngFor="let sub of cat.subcategories">
+                          <a style="cursor: pointer;" (click)="filterSubCatProduct(sub)">{{sub.name}}</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+              </aside>
+              <aside class="widget widget_shop">
+                <figure>
+                  <h4 class="widget-title pb-15">Filtrar por precio</h4>
+                    <div id="nonlinear"></div>
+                    <div class="d-flex align-items-center mt-3">
+                      <div class="w-50">
+                        <div class="form-group position-relative mb-0">
+                          <input type="hidden" class="form-control form-control-sm ps-slider__min">
+                        </div>
+                      </div>
+                      <div class="w-50">
+                        <div class="form-group position-relative mb-0">
+                          <input type="hidden" class="form-control form-control-sm ps-slider__max" name="price" [(ngModel)]="price">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-12">
+                        <button class="ps-btn ps-btn--fullwidth">Filtrar</button>
+                      </div>
+                    </div>
+                  </figure>
+              </aside>
+          </div>
+
+
+          <div class="ps-layout__right">
+              <div class="ps-page__header">
+                  <h1>PRODUCTOS</h1>
+              </div>
+              <div class="header__content-center mb-30">
+                <form class="ps-form--quick-search" method="get" (ngSubmit)="filterProduct()">
+                  <input class="form-control" type="text" placeholder="Busca tu producto..." style="border: 1px solid #eee;" name="name" [(ngModel)]="name">
+                  <button style="background-color: #FCB800; color: #000;">Search</button>
+                  <!-- <button class="reset ml-10" style="border-radius: 0;">resetear</button> -->
+                </form>
+              </div>
+              <div class="ps-shopping ps-tab-root">
+                  <div class="ps-shopping__header">
+                      <p><strong>{{cantProducts}} Productos Encontrados</strong> </p>
+                      <div class="ps-shopping__actions">
+                          <select class="ps-select" data-placeholder="Sort Items">
+                            <option selected disabled>Ordenar por</option>
+                            <option>Menor precio</option>
+                            <option>Mayor precio</option>
+                          </select>
+                          <div class="ps-shopping__view">
+                            <p>Vistas</p>
+                            <ul class="ps-tab-list">
+                              <li class="active"><a href="#tab-1"><i class="icon-grid"></i></a></li>
+                              <li><a href="#tab-2"><i class="icon-list4"></i></a></li>
+                            </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="ps-tabs">
+                      <div class="ps-tab active" id="tab-1">
+                          <div class="ps-shopping-product">
+                              <div class="row">
+                                  <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6" *ngFor="let prod of products">
+                                      <div class="ps-product">
+                                        <div class="ps-product__thumbnail">
+                                          <a [routerLink]="['/info-product/',prod.id,prod.url]">
+                                            <img [src]="prod.image" alt="" />
+                                          </a>
+                                        </div>
+                                        <div class="ps-product__container">
+                                          <a [routerLink]="['/info-product/',prod.id]" class="ps-product__vendor">{{prod.name}}</a>
+                                          <div class="ps-product__content">
+                                            <p class="ps-product__price">S/{{prod.price}}</p>
+                                          </div>
+                                          <div class="ps-product__content hover">
+                                            <a class="ps-product__title" [routerLink]="['/info-product/',prod.id]" >{{prod.name}}</a>
+                                            <p class="ps-product__price">S/{{prod.price}}</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="ps-pagination">
+                              <ul class="pagination">
+                                  <li class="active"><a href="#">1</a></li>
+                                  <li><a href="#">2</a></li>
+                                  <li><a href="#">3</a></li>
+                                  <li><a href="#">Next Page<i class="icon-chevron-right"></i></a></li>
+                              </ul>
+                          </div>
+                      </div>
+
+                      <div class="ps-tab" id="tab-2">
+                          <div class="ps-shopping-product">
+                              <div class="ps-product ps-product--wide" *ngFor="let prod of products">
+                                  <div class="ps-product__thumbnail">
+                                    <a href="#">
+                                      <img [src]="prod.image" alt="" />
+                                    </a>
+                                  </div>
+                                  <div class="ps-product__container">
+                                    <div class="ps-product__content">
+                                      <a class="ps-product__title" href="product-default.html">{{prod.name}}</a>
+                                      <div [innerHTML]="prod.description"></div>
+                                    </div>
+                                    <div class="ps-product__shopping">
+                                      <p class="ps-product__price">S/{{prod.price}}</p>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="ps-pagination">
+                              <ul class="pagination">
+                                  <li class="active"><a href="#">1</a></li>
+                                  <li><a href="#">2</a></li>
+                                  <li><a href="#">3</a></li>
+                                  <li><a href="#">Next Page<i class="icon-chevron-right"></i></a></li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>
+
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.179.0.min.js"></script>
+
+<app-footer></app-footer>
